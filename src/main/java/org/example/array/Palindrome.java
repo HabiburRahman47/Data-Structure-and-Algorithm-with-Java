@@ -32,7 +32,11 @@ public class Palindrome {
     }
     public static void main(String[] args) {
         String value = "madam";
-        System.out.println(isPalindrome2(value));
+        if (isPalindrome2(value)){
+            System.out.println("Palindrome");
+        }else {
+            System.out.println("Not Palindrome");
+        }
 
     }
 }
