@@ -26,10 +26,53 @@ public class SinglyLinkedList {
         head = newNode;
     }
 
+    public void insertLast(int value){
+        ListNode newNode = new ListNode(value);
+        if (head == null){
+            head = newNode;
+            return;
+        }
+        ListNode current = head;
+        while (current.next != null){
+            current = current.next;
+        }
+        current.next = newNode;
+    }
+
+    public void insert(int position, int value){
+        // 1->3->null
+        // 1 -> 2 -> 3 -> null
+        ListNode node = new ListNode(value);
+        if (position == 1){
+            node.next = head;
+            head = node;
+        }else {
+            int count = 1;
+            ListNode previous = head;
+            while (count < position-1){
+                previous = previous.next;
+                count++;
+            }
+            ListNode current = previous.next;
+            previous.next = node;
+            node.next = current;
+        }
+    }
+
+    public void printNodeValueWithPosition(){
+        ListNode current = head;
+        int count = 1;
+        while (current != null){
+            System.out.println("Position: "+ count+"-->"+current.data);
+            current = current.next;
+            count++;
+        }
+    }
+
     public void display(){
         ListNode current = head;
         while (current != null){
-            System.out.print(current.data+ "-->");
+            System.out.print(current.data+ " -> ");
             current = current.next;
         }
         System.out.print("null\n");
@@ -37,22 +80,11 @@ public class SinglyLinkedList {
 
     public static void main(String[] args) {
         SinglyLinkedList sll = new SinglyLinkedList();
-
-//        sll.head = new ListNode(10);
-//        ListNode second = new ListNode(1);
-//        ListNode third = new ListNode(8);
-//        ListNode forth = new ListNode(11);
-//
-//        sll.head.next = second;
-//        second.next = third;
-//        third.next = forth;
-//
-//        sll.display();
-//        System.out.println("Length:"+sll.findLength());
-        sll.insertFirst(10);
-        sll.insertFirst(11);
-        sll.insertFirst(18);
-
+        sll.insert(1, 2); // 2 -> null
+        sll.insert(2, 4); // 2 -> 4 -> null
+        sll.insert(3, 6); // 2 -> 4 -> 6 -> null
+        sll.insert(1, 1); // 1 -> 2 -> 4 -> 6 -> null
+        sll.insert(2, 8); // 2 -> 8 -> 4 -> 6 -> null
         sll.display();
     }
 }
