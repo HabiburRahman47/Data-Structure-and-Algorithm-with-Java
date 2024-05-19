@@ -59,14 +59,39 @@ public class SinglyLinkedList {
         }
     }
 
-    public void printNodeValueWithPosition(){
-        ListNode current = head;
-        int count = 1;
-        while (current != null){
-            System.out.println("Position: "+ count+"-->"+current.data);
-            current = current.next;
-            count++;
+    public ListNode deleteFirst(){
+        if (head == null){
+            return null;
         }
+        ListNode temp = head;
+        head = head.next;
+        temp.next = null;
+        return temp;
+    }
+    public ListNode deleteLast1(){
+        if (head == null || head.next == null){
+            return head;
+        }
+        ListNode current = head;
+        ListNode previous = null;
+        while (current.next != null){
+            previous = current;
+            current = current.next;
+        }
+        previous.next = null;
+        return current;
+    }
+    public ListNode deleteLast2(){
+        if (head == null || head.next == null){
+            return head;
+        }
+        ListNode temp = head;
+        while (temp.next.next != null){
+            temp = temp.next;
+        }
+        ListNode last = temp.next;
+        temp.next = null;
+        return last;
     }
 
     public void display(){
@@ -86,5 +111,12 @@ public class SinglyLinkedList {
         sll.insert(1, 1); // 1 -> 2 -> 4 -> 6 -> null
         sll.insert(2, 8); // 2 -> 8 -> 4 -> 6 -> null
         sll.display();
+        System.out.println(sll.deleteFirst().data);
+        System.out.println(sll.deleteFirst().data);
+        sll.display();
+        System.out.println(sll.deleteLast2().data);
+        System.out.println(sll.deleteLast1().data);
+        sll.display();
+
     }
 }
