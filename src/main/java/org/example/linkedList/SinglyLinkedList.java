@@ -94,6 +94,23 @@ public class SinglyLinkedList {
         return last;
     }
 
+    public void deleteAt(int position){
+        if (position == 1){
+            head = head.next;
+        }else {
+            ListNode current = head;
+            ListNode prevoious = null;
+            int count = 1;
+            while (count<position){
+                prevoious = current;
+                current = current.next;
+                count++;
+            }
+            prevoious.next = current.next;
+            current.next = null;
+        }
+
+    }
     public void display(){
         ListNode current = head;
         while (current != null){
@@ -111,12 +128,7 @@ public class SinglyLinkedList {
         sll.insert(1, 1); // 1 -> 2 -> 4 -> 6 -> null
         sll.insert(2, 8); // 2 -> 8 -> 4 -> 6 -> null
         sll.display();
-        System.out.println(sll.deleteFirst().data);
-        System.out.println(sll.deleteFirst().data);
+        sll.deleteAt(5);
         sll.display();
-        System.out.println(sll.deleteLast2().data);
-        System.out.println(sll.deleteLast1().data);
-        sll.display();
-
     }
 }
