@@ -1,5 +1,20 @@
 package org.example.linkedList;
 
+class Result{
+    private boolean success;
+    private Integer value;
+    public Result(boolean success, Integer value){
+        this.success = success;
+        this.value = value;
+    }
+    public boolean isSuccess(){
+        return success;
+    }
+    public Integer getValue(){
+        return value;
+    }
+}
+
 public class SinglyLinkedList {
     public ListNode head;
     private static class ListNode{
@@ -111,6 +126,19 @@ public class SinglyLinkedList {
         }
 
     }
+
+    public Result find(int searchKey){
+        int count = 1;
+        ListNode current = head;
+        while (current != null){
+            if (current.data == searchKey){
+                return new Result(true, count);
+            }
+            count++;
+            current = current.next;
+        }
+        return new Result(false, null);
+    }
     public void display(){
         ListNode current = head;
         while (current != null){
@@ -130,5 +158,14 @@ public class SinglyLinkedList {
         sll.display();
         sll.deleteAt(5);
         sll.display();
+
+        int searchKey = 40;
+        Result result = sll.find(searchKey);
+        if (result.isSuccess()){
+            System.out.println("Element: "+ searchKey+ "found at: "+result.getValue()+" position");
+        }else {
+            System.out.println("Element: "+ searchKey+ " not found.");
+        }
+
     }
 }
