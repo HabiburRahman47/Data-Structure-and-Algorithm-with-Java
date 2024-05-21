@@ -128,6 +128,9 @@ public class SinglyLinkedList {
     }
 
     public Result find(int searchKey){
+        if (head == null){
+            return new Result(false,null);
+        }
         int count = 1;
         ListNode current = head;
         while (current != null){
@@ -138,6 +141,19 @@ public class SinglyLinkedList {
             current = current.next;
         }
         return new Result(false, null);
+    }
+
+    public ListNode reverse(){
+        ListNode current = head;
+        ListNode previous = null;
+        ListNode next = null;
+        while (current != null){
+            next = current.next;
+            current.next = previous;
+            previous = current;
+            current = next;
+        }
+        return previous;
     }
     public void display(){
         ListNode current = head;
@@ -166,6 +182,9 @@ public class SinglyLinkedList {
         }else {
             System.out.println("Element: "+ searchKey+ " not found.");
         }
+        sll.display();
+        sll.head = sll.reverse();
+        sll.display();
 
     }
 }
